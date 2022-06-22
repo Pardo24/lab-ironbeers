@@ -19,14 +19,31 @@ app.get('/beers', (req, res) => {
   punkAPI
     .getBeers()
     .then(beersFromApi => {
-      res.send({ beersFromApi });
+      res.render("beers.hbs",{ beersFromApi });
     })
     .catch(error => console.log(error));
 });
+
+
+app.get('/random-beer', (req, res)=>{
+  punkAPI
+  .getRandom()
+  .then(randomBeer=> {
+    res.render("random-beer.hbs",randomBeer[0])
+    console.log(randomBeer)
+  })
+  .catch(error => console.log(error))
+})
+
+
+
+
 // Add the route handlers here:
 
 app.get('/', (req, res) => {
   res.render('index');
 });
 
-app.listen(3000, () => console.log('🏃‍ on port 3000'));
+
+
+app.listen(8008, () => console.log('🏃‍ on port 8008'));
